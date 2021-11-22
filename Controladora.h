@@ -252,7 +252,7 @@ public:
 	void Dibujar(Graphics^ g)
 	{
 		
-		g->DrawString("TIEMPÃ“ : " + ((tiempo - clock()) / 1000), gcnew Font("Arial", 12), Brushes::Black, 540, 35);
+		g->DrawString("TIEMPÓ : " + ((tiempo - clock()) / 1000), gcnew Font("Arial", 12), Brushes::Black, 540, 35);
 
 		
 		obstaculosv2->Dibujar(g, imgObsv2);

@@ -84,8 +84,8 @@ public:
 		if (x + dx >= 0 && x + ancho + dx < g->VisibleClipBounds.Width) // &&
 			x += dx; 
 
-		if (y + dy >= 0 && y + alto + dy < g->VisibleClipBounds.Height)  // &&
-			y += dy;
+	 if(y + dy >= 0 && y + alto + dy < g->VisibleClipBounds.Height)  // &&
+		y += dy;
 
 	}
 
@@ -93,7 +93,6 @@ public:
 	{
 		g->DrawString("VIDAS : " + vidas, gcnew Font("Arial", 12), Brushes::Black, 540, 20);
 		g->DrawString("PUNTOS : " + puntos, gcnew Font("Arial", 12), Brushes::Black, 540, 50 );
-
 
 
 		Rectangle corte = Rectangle(IDx * ancho, accion * alto, ancho, alto);
@@ -126,12 +125,6 @@ public:
 			IDx = (IDx + 1) % 9;
 		else if (accion == Morir)
 			IDx = (IDx + 1) % 6;
-
-
-		
-
-	
-
 
 
 	}

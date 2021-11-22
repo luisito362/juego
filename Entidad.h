@@ -13,6 +13,8 @@ protected:
 public:
 
 	Entidad() {
+
+	
 		x = y = 0;
 		dx = dy = 0;
 		ancho = alto = 0;
