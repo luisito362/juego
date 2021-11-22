@@ -3,6 +3,7 @@
 #include "Obstaculo.h"
 #include "Enemigo.h"
 #include "bala.h"
+#include "Obstaculov2.h"
 
 
 ref class Controladora
@@ -13,14 +14,17 @@ private:
 	Obstaculos* obstaculos;
 	Enemigos* enemigos;
 	Balas* balas;
+	Obstaculosv2* obstaculosv2;
 	
 	Bitmap^ imgTroll;
 	Bitmap^ imgJugador;
 	Bitmap^ imgEnemigo;
+	Bitmap^ imgObsv2;
 	
 
 	int cd_ataque_enemigo;
 	int cd_ataque_obstaculo;
+	int cd_ataque_obstaculo2;
 	int tiempo;
 
 	bool resultado;
@@ -32,22 +36,26 @@ public:
 		imgTroll = gcnew Bitmap("imgs/piza.png");
 		imgJugador = gcnew Bitmap("img/jugador_v2.png");
 		imgEnemigo = gcnew Bitmap("imgs/hamburguesas.png");
+		imgObsv2 = gcnew Bitmap("imgs/broco.png");
 		
  
 		jugador = new Jugador(imgJugador,v);
 		obstaculos = new Obstaculos(5, jugador->Area(), imgTroll);
+		obstaculosv2 = new Obstaculosv2(5, jugador->Area(), imgObsv2);
 		enemigos = new Enemigos(imgEnemigo, ene);
 		balas = new Balas();
 		
+		cd_ataque_obstaculo2 = 0;
 		cd_ataque_obstaculo = 0;
 		cd_ataque_enemigo = 0;
-		objetivo = 5 + ene;
+		objetivo = 10 + ene;
 		tiempo = t * 1000 + clock();
 
 
 	}
 	~Controladora() {
-
+		 
+		delete obstaculosv2;
 		delete jugador;
 		delete obstaculos;
 		delete imgTroll;
@@ -144,6 +152,7 @@ public:
 		if (jugador->GetAccion() >= AtacarArrriba && jugador->GetAccion() <= AtacarDerecha && jugador->GetIDx() == 7)
 		{
 			jugador->SetPuntos(obstaculos->Eliminar(jugador->Area()));
+			jugador->SetPuntos(obstaculosv2->Eliminar(jugador->Area()));
 		}
 		if (jugador->GetAccion() >= DispararArrriba && jugador->GetAccion() <= DispararDerecha && jugador->GetIDx() == 12)
 		{
@@ -170,13 +179,13 @@ public:
 			if (E->GetAcccion() == enemigoMorir && E->GetIDx() == 5)
 			{
 				enemigos->Eliminar(i);
-				jugador->SetPuntos(1);
+				jugador->SetPuntos(100);
 			}
 		}
 
 
-
-		if (enemigos->Colision(jugador->NextHitBox()) && clock() - cd_ataque_enemigo >= 2000)
+		// COLISION JUGADOR CON HAMBURGUESAS
+		if (enemigos->Colision(jugador->NextHitBox()) != false && jugador->GetAccion()!=Morir && clock() - cd_ataque_enemigo >= 2000)
 		{
 			jugador->SetVidas(-1);
 			cd_ataque_enemigo = clock();
@@ -187,6 +196,8 @@ public:
 			}
 
 		}
+
+		// COLISION JUGADOR CON PIZZAS
 		if (obstaculos->Colision(jugador->NextHitBox()) && clock() - cd_ataque_obstaculo >= 2000)
 		{
 			jugador->SetVidas(-1);
@@ -198,10 +209,14 @@ public:
 			}
 		}
 
-		/*
-		if (obstaculos->Colision(jugador->NextHitBox()) == false && jugador->GetAccion() != Morir)
-			jugador->Mover(g);
-		*/
+		// COLISION JUGADRO CON BROCOLIS
+		if (obstaculosv2->Colision(jugador->NextHitBox()) && clock() - cd_ataque_obstaculo2 >= 2000)
+		{
+			cd_ataque_obstaculo2 = clock();
+
+		}
+		
+		
 
 
 
@@ -226,7 +241,7 @@ public:
 		}
 	
 	
-		
+		obstaculosv2->Mover(g);
 		jugador->Mover(g);
 		obstaculos->Mover(g);
 		enemigos->Mover(g);
@@ -237,9 +252,10 @@ public:
 	void Dibujar(Graphics^ g)
 	{
 		
-		g->DrawString("TIEMPÓ : " + ((tiempo - clock()) / 1000), gcnew Font("Arial", 12), Brushes::Black, 540, 35);
+		g->DrawString("TIEMPÃ“ : " + ((tiempo - clock()) / 1000), gcnew Font("Arial", 12), Brushes::Black, 540, 35);
 
 		
+		obstaculosv2->Dibujar(g, imgObsv2);
 		obstaculos->Dibujar(g, imgTroll);
 		enemigos->Dibujar(g, imgEnemigo);
 		balas->Dibujar(g);
