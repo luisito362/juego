@@ -1,5 +1,8 @@
 #pragma once
 #include "FrmMain.h"
+#include "FrmInstrucciones.h"
+#include "FrmCreditos.h"
+
 
 namespace Caballero {
 
@@ -33,7 +36,7 @@ namespace Caballero {
 	protected:
 
 	protected:
-	private: System::Windows::Forms::Label^ label1;
+
 	private: System::Windows::Forms::NumericUpDown^ nudv;
 
 
@@ -45,6 +48,8 @@ namespace Caballero {
 
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::NumericUpDown^ nudt;
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ button2;
 
 
 
@@ -56,14 +61,16 @@ namespace Caballero {
 	
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(FrmMenu::typeid));
 			this->btnIniciar = (gcnew System::Windows::Forms::Button());
-			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->nudv = (gcnew System::Windows::Forms::NumericUpDown());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->nudene = (gcnew System::Windows::Forms::NumericUpDown());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->nudt = (gcnew System::Windows::Forms::NumericUpDown());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->nudv))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->nudene))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->nudt))->BeginInit();
@@ -71,7 +78,7 @@ namespace Caballero {
 			// 
 			// btnIniciar
 			// 
-			this->btnIniciar->Location = System::Drawing::Point(167, 185);
+			this->btnIniciar->Location = System::Drawing::Point(36, 100);
 			this->btnIniciar->Name = L"btnIniciar";
 			this->btnIniciar->Size = System::Drawing::Size(88, 37);
 			this->btnIniciar->TabIndex = 0;
@@ -79,20 +86,9 @@ namespace Caballero {
 			this->btnIniciar->UseVisualStyleBackColor = true;
 			this->btnIniciar->Click += gcnew System::EventHandler(this, &FrmMenu::btnIniciar_Click);
 			// 
-			// label1
-			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 48, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(87, 32);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(253, 73);
-			this->label1->TabIndex = 1;
-			this->label1->Text = L"JUEGO";
-			// 
 			// nudv
 			// 
-			this->nudv->Location = System::Drawing::Point(187, 140);
+			this->nudv->Location = System::Drawing::Point(310, 220);
 			this->nudv->Name = L"nudv";
 			this->nudv->Size = System::Drawing::Size(58, 20);
 			this->nudv->TabIndex = 2;
@@ -101,7 +97,7 @@ namespace Caballero {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(196, 124);
+			this->label2->Location = System::Drawing::Point(319, 204);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(33, 13);
 			this->label2->TabIndex = 3;
@@ -110,7 +106,7 @@ namespace Caballero {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(56, 124);
+			this->label3->Location = System::Drawing::Point(302, 98);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(78, 13);
 			this->label3->TabIndex = 5;
@@ -118,7 +114,7 @@ namespace Caballero {
 			// 
 			// nudene
 			// 
-			this->nudene->Location = System::Drawing::Point(63, 140);
+			this->nudene->Location = System::Drawing::Point(309, 114);
 			this->nudene->Name = L"nudene";
 			this->nudene->Size = System::Drawing::Size(58, 20);
 			this->nudene->TabIndex = 4;
@@ -128,7 +124,7 @@ namespace Caballero {
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(321, 124);
+			this->label4->Location = System::Drawing::Point(319, 144);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(42, 13);
 			this->label4->TabIndex = 7;
@@ -136,25 +132,48 @@ namespace Caballero {
 			// 
 			// nudt
 			// 
-			this->nudt->Location = System::Drawing::Point(313, 140);
+			this->nudt->Location = System::Drawing::Point(311, 160);
 			this->nudt->Name = L"nudt";
 			this->nudt->Size = System::Drawing::Size(58, 20);
 			this->nudt->TabIndex = 6;
 			this->nudt->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(36, 160);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(88, 37);
+			this->button1->TabIndex = 8;
+			this->button1->Text = L"Instrucciones";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &FrmMenu::button1_Click);
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(36, 223);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(88, 37);
+			this->button2->TabIndex = 9;
+			this->button2->Text = L"Creditos";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &FrmMenu::button2_Click);
+			// 
 			// FrmMenu
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(400, 280);
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+			this->ClientSize = System::Drawing::Size(415, 317);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->nudt);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->nudene);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->nudv);
-			this->Controls->Add(this->label1);
 			this->Controls->Add(this->btnIniciar);
+			this->ForeColor = System::Drawing::SystemColors::WindowText;
 			this->Name = L"FrmMenu";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"FrmMenu";
@@ -177,5 +196,22 @@ namespace Caballero {
 		frm->ShowDialog();
 		this->Visible = true;
 	}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e){
+	FrmInstrucciones^ frm = gcnew FrmInstrucciones();
+
+
+
+	this->Visible = false;
+	frm->ShowDialog();
+	this->Visible = true;
+}
+private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+	FrmCreditos^ frm = gcnew FrmCreditos();
+
+	this->Visible = false;
+	frm->ShowDialog();
+	this->Visible = true;
+	
+}
 };
 }
